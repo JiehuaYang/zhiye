@@ -1,153 +1,133 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>我的个人信息</title>
-<link rel="stylesheet" type="text/css" href="css/lib/reset.css" />
-<link rel="stylesheet" type="text/css" href="css/lib/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="css/style/common.css" />
-<link rel="stylesheet" type="text/css" href="css/style/personal.css" />
+	<meta charset="UTF-8">
+	<title>我的个人信息</title>
+
+	<link rel="stylesheet" type="text/css" href="../static/css/lib/reset.css" th:href="@{/css/lib/reset.css}" />
+    <link rel="stylesheet" type="text/css" href="../static/css/lib/bootstrap.min.css" th:href="@{/css/lib/bootstrap.min.css}" />
+    <link rel="stylesheet" type="text/css" href="../static/css/style/common.css" th:href="@{/css/style/common.css}" />
+    <link rel="stylesheet" type="text/css" href="../static/css/style/personal.css" th:href="@{/css/style/personal.css}" />
 </head>
 <body>
-	<header role="banner" class="AppHeader">
-		<div class="AppHeader-inner">
-			<a href="home.html" aria-label="知也" class="AppName" title="进入首页">知也</a>
-			<nav role="navigation" class="AppHeader-nav">
-				<a href="home.html" class="AppHeader-navItem">首页</a>
-			</nav>
-			<div role="search" class="SearchBar">
-				<div class="SearchBar-toolWrapper">
-					<form action="searchResultQue.html" class="SearchBar-tool">
-						<div class="SearchBar-input">
-							<input type="text" name="" aria-expanded="false" class="form-control" placeholder="搜索你感兴趣的内容" />
-						</div>
-						<button class="btn btn-default SearchBar-searchIcon">搜索</button>
-					</form>
-				</div>
-				<button type="button" class="SearchBar-askButton Button Button--primary Button--blue" data-toggle="modal" data-target="#askModal">提问</button>
-			</div>
-			<div class="AppHeader-userInfo">
-				<div class="AppHeader-username">
-					<a href="myAnswers.html" title="进入个人主页">薛定谔的猫</a>
-				</div>
-			</div>
-		</div>
-	</header>
+<div th:include="header"></div>
 
-	<main role="main" class="App-main">
-		<div class="main-feed-wrapper">
-			<div class="profile-header">
-				<div class="common-box brief-info">
-					<h1 class="info-author-name">薛定谔的猫</h1>
-					<span>的个人主页</span>
-				</div>
+<main role="main" class="App-main">
+	<div class="main-feed-wrapper">
+		<div class="profile-header">
+			<div class="common-box brief-info">
+				<h1 class="info-author-name">薛定谔的猫</h1>
+				<span class="info-text">的个人主页</span>
+				<br/>
+				<span class="info-author-gender">性别：<span>女</span></span><span class="info-author-experience">经验：<span>2030</span></span>
 			</div>
-			<div class="profile-main">
-				<div class="common-box profileMain-wrapper">
-					<div class="profileMain-header">
-						<div class="profileMain-header-inner">
-							<ul role="tablist" class="Tabs ProfileMain-tabs">
-								<li role="tab" class="Tabs-item" aria-controls="Profile-answers">
-									<a class="Tabs-link" href="myAnswers.html">
-									    回答
-									    <span class="Tabs-meta">28</span>
-									</a>
-								</li>
-								<li role="tab" class="Tabs-item" aria-controls="Profile-asks">
-									<a class="Tabs-link" href="myAsks.html">
-									    提问
-									    <span class="Tabs-meta">15</span>
-									</a>
-								</li>
-								<li role="tab" class="Tabs-item" aria-controls="Profile-info">
-									<a class="Tabs-link is-active" href="myInfo.html">
-									    个人信息
-									</a>
-								</li>
-							</ul>
-						</div>
+		</div>
+		<div class="profile-main">
+			<div class="common-box profileMain-wrapper">
+				<div class="profileMain-header">
+					<div class="profileMain-header-inner">
+						<ul role="tablist" class="Tabs ProfileMain-tabs">
+							<li role="tab" class="Tabs-item" aria-controls="Profile-answers">
+								<a class="Tabs-link" href="">
+									回答
+									<span class="Tabs-meta">28</span>
+								</a>
+							</li>
+							<li role="tab" class="Tabs-item" aria-controls="Profile-asks">
+								<a class="Tabs-link" href="">
+									提问
+									<span class="Tabs-meta">15</span>
+								</a>
+							</li>
+							<li role="tab" class="Tabs-item hide" aria-controls="Profile-info">
+								<a class="Tabs-link is-active" href="">
+									个人信息
+								</a>
+							</li>
+						</ul>
 					</div>
-					<div id="profile-info" class="List">
-						<div class="List-header">
-							<h4>我的个人信息</h4>
+				</div>
+				<div id="profile-info" class="List">
+					<div class="List-header">
+						<h4>我的个人信息</h4>
+					</div>
+					<div class="List-content">
+						<div class="info-item List-item">
+							<span class="item-name">昵称</span>
+							<span class="value">薛定谔的猫</span>
 						</div>
-						<div class="List-content">
-							<div class="info-item List-item">
-								<span class="item-name">昵称</span>
-								<span class="value">薛定谔的猫</span>
-							</div>
-							<div class="info-item List-item gender">
-								<span class="item-name">性别</span>
-		                        <span class="value">女</span>
-		                        <button class="change btn btn-default">修改</button>
-		                        <button class="saveChange btn btn-primary hide">保存修改</button>
-							</div>
-							<div class="info-item List-item">
-								<span class="item-name">密码</span>
-								<span class="value glyphicon glyphicon-lock"></span>
-								<button class="change btn-change-password btn btn-default" data-toggle="modal" data-target="#changePasswordModal">修改密码</span>
-							</div>
-						</div>	
+						<div class="info-item List-item gender">
+							<span class="item-name">性别</span>
+							<span class="value">女</span>
+							<button class="change btn btn-default">修改</button>
+							<button class="saveChange btn btn-primary hide">保存修改</button>
+						</div>
+						<div class="info-item List-item">
+							<span class="item-name">密码</span>
+							<span class="value glyphicon glyphicon-lock"></span>
+							<button class="change btn-change-password btn btn-default" data-toggle="modal" data-target="#changePasswordModal">修改密码</button>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</main>
+	</div>
+</main>
 
 <div class="modal" id="askModal">
-	<div class="modal-dialog"> 
-		<div class="modal-content"> 
- 			<div class="modal-header">
- 				<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button> 
- 				<h4 class="modal-title">提问</h4> 
- 			</div> 
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+				<h4 class="modal-title">提问</h4>
+			</div>
 			<div class="modal-body">
 				<textarea name="question-ask-title" class="form-control" placeholder="输入你的问题" rows="1"></textarea>
 				<br />
-  				<textarea name="question-ask-desc" class="form-control" placeholder="输入你的问题描述" rows="10"></textarea>
-  			</div> 
-  			<div class="modal-footer">
-   				<button type="button" class="btn btn-primary btn-submit-ask">提交</button> 
-   			</div>
-    	</div>
-	</div> 
+				<textarea name="question-ask-desc" class="form-control" placeholder="输入你的问题描述" rows="10"></textarea>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary btn-submit-ask">提交</button>
+			</div>
+		</div>
+	</div>
 </div>
 
 <div class="modal" id="changePasswordModal">
-	<div class="modal-dialog"> 
-		<div class="modal-content"> 
- 			<div class="modal-header">
- 				<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button> 
- 				<h4 class="modal-title">修改密码</h4> 
- 			</div> 
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+				<h4 class="modal-title">修改密码</h4>
+			</div>
 			<div class="modal-body">
 				<div class="password-change">
 					<form id="passwordForm" action="#">
-		                <div class="input-group old">
-		                    <span class="input-group-addon">原密码</span>
-		                    <input name="oldpass" id="oldpass" type="password" placeholder="输入你的原密码" class="form-control" />
-		                </div>
-		                <div class="input-group new">
-		                    <span class="input-group-addon">新密码</span>
-		                    <input name="newpass" id="newpass" type="password" placeholder="设置你的新密码" class="form-control" />
-		                </div>
-		                <div class="input-group again">
-		                    <span class="input-group-addon">确认新密码</span>
-		                    <input name="againpass" id="againpass" type="password" placeholder="再次输入你的新密码" class="form-control" />
-		                </div>
-                        <button type="submit" class="change btn btn-primary">确认修改</button>
-                    </form>
+						<div class="input-group old">
+							<span class="input-group-addon">原密码</span>
+							<input name="oldpass" id="oldpass" type="password" placeholder="输入你的原密码" class="form-control" />
+						</div>
+						<div class="input-group new">
+							<span class="input-group-addon">新密码</span>
+							<input name="newpass" id="newpass" type="password" placeholder="设置你的新密码" class="form-control" />
+						</div>
+						<div class="input-group again">
+							<span class="input-group-addon">确认新密码</span>
+							<input name="againpass" id="againpass" type="password" placeholder="再次输入你的新密码" class="form-control" />
+						</div>
+						<button type="submit" class="change btn btn-primary">确认修改</button>
+					</form>
 				</div>
-  			</div>
-    	</div>
-	</div> 
+			</div>
+		</div>
+	</div>
 </div>
 
-<script type="text/javascript" src="js/lib/jquery.min.js"></script>
-<script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/lib/jquery.validate.js"></script>
-<script type="text/javascript" src="js/lib/jquery.validate.messages_cn.js"></script>
-<script type="text/javascript" src="js/style/common.js"></script>
-<script type="text/javascript" src="js/style/myInfo.js"></script>
+<script type="text/javascript" src="/js/lib/jquery.min.js"></script>
+<script type="text/javascript" src="/js/lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/lib/jquery.validate.js"></script>
+<script type="text/javascript" src="/js/lib/jquery.validate.messages_cn.js"></script>
+<script type="text/javascript" src="/js/style/common.js"></script>
+<script type="text/javascript" src="/js/style/myInfo.js"></script>
 </body>
 </html>

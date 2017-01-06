@@ -46,20 +46,20 @@ $(function(){
 	});
 
 	// 选择排序方式
-	var $filter = $("#answers-filter");
-	var $checkedOne = $filter.find("button");
-	var $anotherOne = $filter.find("ul li a");
+	// var $filter = $("#answers-filter");
+	// var $checkedOne = $filter.find("button");
+	// var $anotherOne = $filter.find("ul li a");
 	// 下拉菜单中的选项被选中时
-	$anotherOne.click(function(event){
-		event.preventDefault();
-		if($(this).html() == "按时间排序"){
-			$(this).html("按赞数排序");
-			$checkedOne.html('按时间排序 <span class="caret"></span>');
-		}else{
-			$(this).html("按时间排序");
-			$checkedOne.html('按赞数排序 <span class="caret"></span>');
-		}
-	});
+	// $anotherOne.click(function(event){
+	// 	event.preventDefault();
+	// 	if($(this).html() == "按时间排序"){
+	// 		$(this).html("按赞数排序");
+	// 		$checkedOne.html('按时间排序 <span class="caret"></span>');
+	// 	}else{
+	// 		$(this).html("按时间排序");
+	// 		$checkedOne.html('按赞数排序 <span class="caret"></span>');
+	// 	}
+	// });
 });
 
 // 为Date时间设置前导零

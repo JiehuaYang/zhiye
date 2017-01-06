@@ -1,0 +1,43 @@
+<div th:each="q : ${questionList}">
+<div class="feed-item common-box">
+    <div class="feed-item-inner">
+        <div class="feed-main">
+            <!-- source , vote , title , content , meta -->
+            <div class="feed-source">
+								<span class="author-link-line">
+									<a href="xuedinge.html" class="author-link" th:text="${q.authorName}">用户名</a>
+								</span>
+
+                                <span class="author-do">
+									提出了问题
+								</span>
+
+            </div>
+
+            <!--标题头-->
+            <h2 class="feed-title ask-title">
+                <a href="question.html" class="question-link" target="_blank" th:text="${q.title}">题目</a>
+            </h2>
+
+
+            <div class="feed-content">
+                <!--缩略内容-->
+                <div class="feed-summary">
+                    缩略内容
+                </div>
+                <!--全文内容-->
+                <div class="feed-summary-whole clearfix hide" th:text="${q.content}">
+                    全文
+                    <button type="button" class="btn pack-up">收起</button>>
+                </div>
+            </div>
+            <div class="feed-meta">
+								<span class="meta-item meta-answer">
+									<span class="answer-count" th:text="${q.numOfAnswers}">具体各个</span>
+									个回答
+								</span>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

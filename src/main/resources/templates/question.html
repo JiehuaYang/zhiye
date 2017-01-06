@@ -3,36 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <title>问题具体页</title>
-<link rel="stylesheet" type="text/css" href="css/lib/reset.css" />
-<link rel="stylesheet" type="text/css" href="css/lib/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="css/style/common.css" />
-<link rel="stylesheet" type="text/css" href="css/style/question.css" />
+
+<link rel="stylesheet" type="text/css" href="../static/css/lib/reset.css" th:href="@{/css/lib/reset.css}" />
+<link rel="stylesheet" type="text/css" href="../static/css/lib/bootstrap.min.css" th:href="@{/css/lib/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" href="../static/css/style/common.css" th:href="@{/css/style/common.css}" />
+<link rel="stylesheet" type="text/css" href="../static/css/style/question.css" th:href="@{/css/style/question.css}" />
 </head>
 <body>
-	<header role="banner" class="AppHeader">
-		<div class="AppHeader-inner">
-			<a href="home.html" aria-label="知也" class="AppName" title="进入首页">知也</a>
-			<nav role="navigation" class="AppHeader-nav">
-				<a href="home.html" class="AppHeader-navItem">首页</a>
-			</nav>
-			<div role="search" class="SearchBar">
-				<div class="SearchBar-toolWrapper">
-					<form action="searchResultQue.html" class="SearchBar-tool">
-						<div class="SearchBar-input">
-							<input type="text" name="" aria-expanded="false" class="form-control" placeholder="搜索你感兴趣的内容" />
-						</div>
-						<button class="btn btn-default SearchBar-searchIcon">搜索</button>
-					</form>
-				</div>
-				<button type="button" class="SearchBar-askButton Button Button--primary Button--blue" data-toggle="modal" data-target="#askModal">提问</button>
-			</div>
-			<div class="AppHeader-userInfo">
-				<div class="AppHeader-username">
-					<a href="myAnswers.html" title="进入个人主页">薛定谔的猫</a>
-				</div>
-			</div>
-		</div>
-	</header>
+	<div th:include="header"></div>
 
 	<main role="main" class="App-main">
 		<div class="main-feed-wrapper">
@@ -40,29 +18,29 @@
 				<!-- 问题的具体信息，包括问题名称、提出者、问题描述等 -->
 				<div class="question-info common-box clearfix">
 					<h2 class="question-title">
-						<a href="question.html" class="question-link" target="_blank">什么是有效的关心？</a>
+						<!--<a href="question.html" class="question-link" target="_blank">什么是有效的关心？</a>-->
 					</h2>
 					<span class="author-link-line">
-						提出者：
-						<a href="xuedinge.html" class="author-link">薛定谔的猫</a>
+						<!--提出者：-->
+						<!--<a href="xuedinge.html" class="author-link">薛定谔的猫</a>-->
 					</span>
 					<span class="time-line">
-						提出时间：
-						<span class="publish-time">2016-09-19&nbsp;&nbsp;&nbsp;21:15</span>
+						<!--提出时间：-->
+						<!--<span class="publish-time">2016-09-19&nbsp;&nbsp;&nbsp;21:15</span>-->
 					</span>
 					<div class="question-detail">
-						<div class="feed-summary">
-							现在大四 大二升大三那年暑假，由于家里帮忙找了兼职，就没有会老家。正好舍友也有像简直就住在学校旁边，老房子像2000年左右的了，老鼠有成年汉子手掌那么大，反正很破。由于三个人住也没什么，这里说a和b(另外俩舍友)。没住几天a回老家当兵去了，和b在住后来b也走了去杭州玩了，mdzz我明显是被坑的那个。后来就我一个人住那个破房子单间，一楼，靠路边，旁边没人家。很恐怖。以上背景。我之后就一个人，后来住的地方旁边有条流浪狗，我觉得可怜，一般我吃晚饭快餐点两份...<span class="expand">显示全部</span>
-						</div>
-						<div class="feed-summary-whole clearfix hide">
-							<p>现在大四</p>
-							<p>大二升大三那年暑假，由于家里帮忙找了兼职，就没有会老家。正好舍友也有像简直就住在学校旁边，老房子像2000年左右的了，老鼠有成年汉子手掌那么大，反正很破。由于三个人住也没什么，这里说a和b(另外俩舍友)。没住几天a回老家当兵去了，和b在住后来b也走了去杭州玩了，mdzz我明显是被坑的那个。后来就我一个人住那个破房子单间，一楼，靠路边，旁边没人家。很恐怖。</p>
-							<p>以上背景。</p>
-							<p>我之后就一个人，后来住的地方旁边有条流浪狗，我觉得可怜，一般我吃晚饭快餐点两份，我吃一份(大荤)，帮狗带一份(最便宜的六块蛋炒饭)。然后一两天之后狗狗就在我门口不走了，我开门它还要进来，然后就趴在门口边，我怕野狗半夜发疯咬我喉咙怎么办，一直不许进来。它也乖，就趴在我门口，就这样半个月后。有天晚上差不多两三点左右，狗狗开始叫了(以前很安静一直没叫过)，就在我门口的地方，很凶的那种，很凶的那种，很凶的那种。我被吵醒，觉得很怪，但是害怕就没下床开门去看。那只狗就在门口叫了40分钟左右都没有停过，一直叫。我也听不见有人过路，一点声音都没有，只有狗叫，就算过路也不用过这么久，我也没在意，继续睡了。</p>
-							<p>第二天早上上班出门，看见离我不远处的有户人家办丧，半夜死人了。我看了毛骨悚然。因为老家在农村，知道狗可以看见鬼。我就估计昨晚狗应该看见了脏东西，然后就为了护着我一直在门口叫，但是一想到昨晚有个脏东西就在我门外，屎差点吓出来。然后晚上请狗吃了顿好的，毕竟过命的交情。现在想想也蛮恐怖的。</p>
-							<p>之后的日子狗也没有叫过，更加肯定了我的想法。</p>
-							<button type="button" class="btn pack-up">收起</button>
-						</div>
+						<!--<div class="feed-summary">-->
+							<!--现在大四 大二升大三那年暑假，由于家里帮忙找了兼职，就没有会老家。正好舍友也有像简直就住在学校旁边，老房子像2000年左右的了，老鼠有成年汉子手掌那么大，反正很破。由于三个人住也没什么，这里说a和b(另外俩舍友)。没住几天a回老家当兵去了，和b在住后来b也走了去杭州玩了，mdzz我明显是被坑的那个。后来就我一个人住那个破房子单间，一楼，靠路边，旁边没人家。很恐怖。以上背景。我之后就一个人，后来住的地方旁边有条流浪狗，我觉得可怜，一般我吃晚饭快餐点两份...<span class="expand">显示全部</span>-->
+						<!--</div>-->
+						<!--<div class="feed-summary-whole clearfix hide">-->
+							<!--<p>现在大四</p>-->
+							<!--<p>大二升大三那年暑假，由于家里帮忙找了兼职，就没有会老家。正好舍友也有像简直就住在学校旁边，老房子像2000年左右的了，老鼠有成年汉子手掌那么大，反正很破。由于三个人住也没什么，这里说a和b(另外俩舍友)。没住几天a回老家当兵去了，和b在住后来b也走了去杭州玩了，mdzz我明显是被坑的那个。后来就我一个人住那个破房子单间，一楼，靠路边，旁边没人家。很恐怖。</p>-->
+							<!--<p>以上背景。</p>-->
+							<!--<p>我之后就一个人，后来住的地方旁边有条流浪狗，我觉得可怜，一般我吃晚饭快餐点两份，我吃一份(大荤)，帮狗带一份(最便宜的六块蛋炒饭)。然后一两天之后狗狗就在我门口不走了，我开门它还要进来，然后就趴在门口边，我怕野狗半夜发疯咬我喉咙怎么办，一直不许进来。它也乖，就趴在我门口，就这样半个月后。有天晚上差不多两三点左右，狗狗开始叫了(以前很安静一直没叫过)，就在我门口的地方，很凶的那种，很凶的那种，很凶的那种。我被吵醒，觉得很怪，但是害怕就没下床开门去看。那只狗就在门口叫了40分钟左右都没有停过，一直叫。我也听不见有人过路，一点声音都没有，只有狗叫，就算过路也不用过这么久，我也没在意，继续睡了。</p>-->
+							<!--<p>第二天早上上班出门，看见离我不远处的有户人家办丧，半夜死人了。我看了毛骨悚然。因为老家在农村，知道狗可以看见鬼。我就估计昨晚狗应该看见了脏东西，然后就为了护着我一直在门口叫，但是一想到昨晚有个脏东西就在我门外，屎差点吓出来。然后晚上请狗吃了顿好的，毕竟过命的交情。现在想想也蛮恐怖的。</p>-->
+							<!--<p>之后的日子狗也没有叫过，更加肯定了我的想法。</p>-->
+							<!--<button type="button" class="btn pack-up">收起</button>-->
+						<!--</div>-->
 					</div>
 
 					<button class="btn btn-lg btn-answer" data-toggle="modal" data-target="#answerModal">回答</button>
@@ -70,7 +48,7 @@
 
 				<!-- 问题的所有回答 -->
 				<div class="question-answers common-box">
-					<!-- 回答的数量、及排序方式 -->
+					<!-- 回答的数量、及排序方式（默认按赞数排序） -->
 					<div class="answers-title clearfix">
 						<div id="answers-filter" class="Sorter">
 							<div class="dropdown">
@@ -83,10 +61,15 @@
 							    </ul>
 							</div>
 						</div>
-						<h3 data-num="104" id="answers-num">104个回答</h3>
+						<!--<h3 data-num="104" id="answers-num">104个回答</h3>-->
+						<h3 data-num="0" id="answers-num"></h3>
 					</div>
 					<!-- 回答的具体内容 -->
 					<div class="answers-wrap">
+						<div id="none-question-ans" class="common-box none hide">
+							暂时没有回答 ~
+						</div>
+
 						<div class="answer-item">
 							<div class="answer-head ">
 								<span class="author-link-line">
@@ -100,7 +83,7 @@
 							</div>
 							<div class="feed-vote" title="赞一个">
 								133
-							</div>	
+							</div>
 							<div class="answer-text">
 								<div class="feed-summary">
 									现在大四 大二升大三那年暑假，由于家里帮忙找了兼职，就没有会老家。正好舍友也有像简直就住在学校旁边，老房子像2000年左右的了，老鼠有成年汉子手掌那么大，反正很破。由于三个人住也没什么，这里说a和b(另外俩舍友)。没住几天a回老家当兵去了，和b在住后来b也走了去杭州玩了，mdzz我明显是被坑的那个。后来就我一个人住那个破房子单间，一楼，靠路边，旁边没人家。很恐怖。以上背景。我之后就一个人，后来住的地方旁边有...<span class="expand">显示全部</span>
@@ -123,7 +106,7 @@
 								<!-- 显示评论 -->
 								<div class="comment-holder hide">
 									<div class="comment-wrapper">
-										<i class="icon icon-spike"></i>	
+										<i class="icon icon-spike"></i>
 										<div class="comment-box">
 											<div class="commentItem">
 												<div class="commentItem-header">
@@ -233,159 +216,11 @@
 								</div>
 							</div>
 						</div>
-
-						<div class="answer-item">
-							<div class="answer-head ">
-								<span class="author-link-line">
-									<a href="xuedinge.html" class="author-link">薛定谔的猫</a>
-								</span>
-								<br />
-								<span class="voters">
-									<span class="voteCount">133</span>
-									&nbsp;人赞同
-								</span>
-							</div>
-							<div class="feed-vote" title="赞一个">
-								133
-							</div>	
-							<div class="answer-text">
-								<div class="feed-summary">
-									现在大四 大二升大三那年暑假，由于家里帮忙找了兼职，就没有会老家。正好舍友也有像简直就住在学校旁边，老房子像2000年左右的了，老鼠有成年汉子手掌那么大，反正很破。由于三个人住也没什么，这里说a和b(另外俩舍友)。没住几天a回老家当兵去了，和b在住后来b也走了去杭州玩了，mdzz我明显是被坑的那个。后来就我一个人住那个破房子单间，一楼，靠路边，旁边没人家。很恐怖。以上背景。我之后就一个人，后来住的地方旁边有...<span class="expand">显示全部</span>
-								</div>
-								<div class="feed-summary-whole clearfix hide">
-									<p>现在大四</p>
-									<p>大二升大三那年暑假，由于家里帮忙找了兼职，就没有会老家。正好舍友也有像简直就住在学校旁边，老房子像2000年左右的了，老鼠有成年汉子手掌那么大，反正很破。由于三个人住也没什么，这里说a和b(另外俩舍友)。没住几天a回老家当兵去了，和b在住后来b也走了去杭州玩了，mdzz我明显是被坑的那个。后来就我一个人住那个破房子单间，一楼，靠路边，旁边没人家。很恐怖。</p>
-									<p>以上背景。</p>
-									<p>我之后就一个人，后来住的地方旁边有条流浪狗，我觉得可怜，一般我吃晚饭快餐点两份，我吃一份(大荤)，帮狗带一份(最便宜的六块蛋炒饭)。然后一两天之后狗狗就在我门口不走了，我开门它还要进来，然后就趴在门口边，我怕野狗半夜发疯咬我喉咙怎么办，一直不许进来。它也乖，就趴在我门口，就这样半个月后。有天晚上差不多两三点左右，狗狗开始叫了(以前很安静一直没叫过)，就在我门口的地方，很凶的那种，很凶的那种，很凶的那种。我被吵醒，觉得很怪，但是害怕就没下床开门去看。那只狗就在门口叫了40分钟左右都没有停过，一直叫。我也听不见有人过路，一点声音都没有，只有狗叫，就算过路也不用过这么久，我也没在意，继续睡了。</p>
-									<p>第二天早上上班出门，看见离我不远处的有户人家办丧，半夜死人了。我看了毛骨悚然。因为老家在农村，知道狗可以看见鬼。我就估计昨晚狗应该看见了脏东西，然后就为了护着我一直在门口叫，但是一想到昨晚有个脏东西就在我门外，屎差点吓出来。然后晚上请狗吃了顿好的，毕竟过命的交情。现在想想也蛮恐怖的。</p>
-									<p>之后的日子狗也没有叫过，更加肯定了我的想法。</p>
-									<button type="button" class="btn pack-up">收起</button>
-								</div>
-							</div>
-							<div class="answer-actions">
-								<div class="meta-panel">
-									<span class="meta-item answer-date">编辑于2016-09-21</span>
-									<a href="#" class="meta-item toggle-comment"><span class="glyphicon glyphicon-comment"></span><span class="comment-num">32</span>条评论</a>
-								</div>
-								<!-- 显示评论 -->
-								<div class="comment-holder hide">
-									<div class="comment-wrapper">
-										<i class="icon icon-spike"></i>	
-										<div class="comment-box">
-											<div class="commentItem">
-												<div class="commentItem-header">
-													<a href="xuedinge.html" class="author-link">鬼怪大叔</a>
-													回复
-													<a href="xuedinge.html" class="author-link">地域使者</a>
-												</div>
-												<div class="commentItem-content">一点品味都没有的帽子</div>
-												<div class="commentItem-footer">
-													<span class="commentItem-likes">
-														<span>20</span>
-														<span>赞</span>
-													</span>
-													<time title="2016-11-11 17:23:02">10-29&nbsp;17:23</time>
-													<a class="commentItem-action action-reply unselectable">
-														<span class="glyphicon glyphicon-comment"></span>
-														<span>回复</span>
-													</a>
-													<a class="commentItem-action action-like unselectable">
-														<span class="glyphicon glyphicon-thumbs-up"></span>
-														<span>赞</span>
-													</a>
-												</div>
-											</div>
-
-											<div class="commentItem">
-												<div class="commentItem-header">
-													<a href="xuedinge.html" class="author-link">地域使者</a>
-												</div>
-												<div class="commentItem-content">附鄙夷眼神默默走开</div>
-												<div class="commentItem-footer">
-													<span class="commentItem-likes">
-														<span>20</span>
-														<span>赞</span>
-													</span>
-													<time title="2016-11-11 17:23:02">10-29&nbsp;17:23</time>
-													<a class="commentItem-action action-reply unselectable">
-														<span class="glyphicon glyphicon-comment"></span>
-														<span>回复</span>
-													</a>
-													<a class="commentItem-action action-like unselectable">
-														<span class="glyphicon glyphicon-thumbs-up"></span>
-														<span>赞</span>
-													</a>
-												</div>
-											</div>
-
-											<div class="commentItem">
-												<div class="commentItem-header">
-													<a href="xuedinge.html" class="author-link">鬼怪大叔</a>
-												</div>
-												<div class="commentItem-content">如果她是王的转世，我已经考虑原谅她了</div>
-												<div class="commentItem-footer">
-													<span class="commentItem-likes">
-														<span>20</span>
-														<span>赞</span>
-													</span>
-													<time title="2016-11-11 17:23:02">10-29&nbsp;17:23</time>
-													<a class="commentItem-action action-reply unselectable">
-														<span class="glyphicon glyphicon-comment"></span>
-														<span>回复</span>
-													</a>
-													<a class="commentItem-action action-like unselectable">
-														<span class="glyphicon glyphicon-thumbs-up"></span>
-														<span>赞</span>
-													</a>
-												</div>
-											</div>
-
-											<div class="commentItem">
-												<div class="commentItem-header">
-													<a href="xuedinge.html" class="author-link">薛定谔的猫</a>
-												</div>
-												<div class="commentItem-content">哈哈哈</div>
-												<div class="commentItem-footer">
-													<span class="commentItem-likes">
-														<span>20</span>
-														<span>赞</span>
-													</span>
-													<time title="2016-11-11 17:23:02">10-29&nbsp;17:23</time>
-													<a class="commentItem-action action-reply unselectable">
-														<span class="glyphicon glyphicon-comment"></span>
-														<span>回复</span>
-													</a>
-													<a class="commentItem-action action-like unselectable">
-														<span class="glyphicon glyphicon-thumbs-up"></span>
-														<span>赞</span>
-													</a>
-												</div>
-											</div>
-										</div>
-										<!-- 加载更多 -->
-										<div class="load-more">
-											<span class="more">加载更多>></span>
-											<span class="loading hide">加载中...</span>
-										</div>
-										<!-- 提交评论 -->
-										<div class="comment-box-expanded">
-											<div class="comment-box-input">
-												<textarea name="comment-publish" placeholder="写下你的评论" class="form-control"></textarea>
-											</div>
-											<div class="comment-box-actions clearfix">
-												<button type="button" class="comment-box-submitButton btn btn-sm btn-primary">评论</button>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- 加载更多 -->
-						<div class="load-more">
-							<span class="more">加载更多>></span>
-							<span class="loading hide">加载中...</span>
-						</div>
+					</div>
+					<!-- 加载更多 -->
+					<div class="load-more load-moreAns">
+						<span class="more">加载更多>></span>
+						<span class="loading hide">加载中...</span>
 					</div>
 				</div>
 			</div>
@@ -428,10 +263,50 @@
 	</div> 
 </div>
 
+<div class="modal" id="deleteModal" data-delId="0">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+				<h4 class="modal-title">删除</h4>
+			</div>
+			<div class="modal-body">
 
-<script type="text/javascript" src="js/lib/jquery.min.js"></script>
-<script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/style/common.js"></script>
-<script type="text/javascript" src="js/style/question.js"></script>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="confirm-del btn btn-primary">确认删除</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal" id="popModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+				<h4 class="modal-title">提示</h4>
+			</div>
+			<div class="modal-body">
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary">确定</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript" src="/js/lib/jquery.min.js"></script>
+<script type="text/javascript" src="/js/lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/style/common.js"></script>
+	<script type="text/javascript" src="/js/custom/checkQuestion.js"></script>
+
+<!--<script type="text/javascript" src="../static/js/lib/jquery.min.js"></script>-->
+<!--<script type="text/javascript" src="../static/js/lib/bootstrap.min.js"></script>-->
+<!--<script type="text/javascript" src="../static/js/custom/checkQuestion.js"></script>-->
+<!--<script type="text/javascript" src="../static/js/style/common.js"></script>-->
+<!--<script type="text/javascript" src="../static/js/style/question.js"></script>-->
 </body>
 </html>

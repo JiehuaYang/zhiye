@@ -4,11 +4,13 @@ import org.hibernate.annotations.*;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * Created by pc on 2016/12/30.
  */
-@Entity(name = "user")
+@Entity
+@Table(name="user")
 @DynamicInsert
 public class User {
 
@@ -17,6 +19,26 @@ public class User {
     private String userName;
     private String password;
     private Integer sex;
+    private Integer integral;
+
+    private Integer numOfQuestion;
+    private Integer numOfAnswer;
+    @Transient
+    public Integer getNumOfAnswer() {
+        return numOfAnswer;
+    }
+
+    public void setNumOfAnswer(Integer numOfAnswer) {
+        this.numOfAnswer = numOfAnswer;
+    }
+    @Transient
+    public Integer getNumOfQuestion() {
+        return numOfQuestion;
+    }
+
+    public void setNumOfQuestion(Integer numOfQuestion) {
+        this.numOfQuestion = numOfQuestion;
+    }
 
     public User(String email, String userName, String password) {
         this.email = email;
@@ -72,6 +94,14 @@ public class User {
         this.sex = sex;
     }
 
+    public Integer getIntegral() {
+        return integral;
+    }
+
+    public void setIntegral(Integer integral) {
+        this.integral = integral;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -80,6 +110,7 @@ public class User {
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", sex=" + sex +
+                ", integral=" + integral +
                 '}';
     }
 }

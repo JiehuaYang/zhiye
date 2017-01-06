@@ -1,5 +1,6 @@
 $(function(){
-	// “显示全部”与“收起”
+    var userId = $("#user_id").val();
+	// “显示全部”与“收起”***********************************************************
 	$(document).on("click", ".expand", function(){
 		var $parent = $(this).parent();
 		$parent.addClass("hide");
@@ -17,12 +18,95 @@ $(function(){
 		$(this).find(".expand").click();
 	});
 
-	// 显示评论
+	// 显示评论******************************************************************8
 	$(document).on("click", ".toggle-comment", function(event){
 		event.preventDefault();
+
+		// 取得对应回答id的评论
+		// var $item = $(this).parents(".feed-item") == undefined ? $(this).parents(".feed-item") : $(this).parents(".List-item");
+		if($(this).parents(".feed-item").html()) {
+			var $item = $(this).parents(".feed-item");
+		}else if($(this).parents(".List-item").html()) {
+			var $item = $(this).parents(".List-item");
+		}else {
+			var $item = $(this).parents(".answer-item");
+		}
+
+		// 收起评论，不进行请求
+		if(!$item.find(".comment-holder").hasClass("hide")) {
+			// alert("收起评论");
+            $(this).parent().next().toggleClass("hide");
+            $(this).toggleClass("on");
+			return true;
+		}
+
+        $item.find(".comment-box").empty();       // 清空评论区域
+		var answerId = $item.attr("id").substr(4);
+		var answerThread = $item.attr("data-answerThread");
+		var questionId = $(this).parents(".feed-main").find(".question-link").attr("id").slice(4);
+		//alert(questionId);
+        $.ajax({
+            type: "GET",
+            url: "/comments/q/" + questionId + "/child",
+            contentType: "application/json",
+            data: {
+				uid: userId,
+				thread: answerThread + answerId + '/'
+            },
+            dataType: "json",
+            success: function (data) {
+                console.log("answerId: " + answerId);
+                console.log("newThread: " + answerThread + answerId + '/');
+                if(data.length == 0){
+                	alert("id为" + answerId + "的回答没有评论");
+                    return;
+                }
+                $.each(data, function(){
+                	alert("此评论的id：" + this.id);
+
+                    // 输出格式：01-23 18:55
+                    var date = new Date(this.time);
+                    var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-',
+                        D = (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) + ' ',
+                        h = date.getHours() + ':',
+                        m = date.getMinutes();
+                    var time = M+D+h+m;
+
+                    var str = '<div class="commentItem" data-commentId="'
+						+ this.id + '"><div class="commentItem-header"><a href="/users/u/'
+						+ this.authorId + '" class="author-link">'
+						+ this.authorName + '</a>';
+                    // 此为回复
+                    if(this.replyId) {
+						str = str + ' 回复 <a href="/users/u/'
+                            + this.replyId + '" class="author-link">'
+                            + this.replyName + '</a>';
+                    }
+                    // 此为本人发起的评论或回复
+                    if(this.authorId == userId) {
+                    	str += '<button type="button" class="btn commentBox-textButton delete-button">删除</button>';
+					}
+					str = str + '</div><div class="commentItem-content">'
+						+ this.summary + '</div><div class="commentItem-footer"><span class="commentItem-likes"><span>'
+						+ this.numOfSupport + '</span><span>赞</span></span><time>'    // 10-29&nbsp;17:23
+						+ time + '</time><a class="commentItem-action action-reply unselectable"><span class="glyphicon glyphicon-comment"></span><span>回复</span></a>';
+                    // 用户之前是否点赞过此评论或回复
+                    if(this.support) {
+                    	str += '<a class="commentItem-action action-like unselectable on"><span class="glyphicon glyphicon-thumbs-up"></span><span>赞</span></a></div></div>';
+					}else {
+						str += '<a class="commentItem-action action-like unselectable"><span class="glyphicon glyphicon-thumbs-up"></span><span>赞</span></a></div></div>';
+                    }
+                    // 插入文档流
+                    $item.find(".comment-box").append(str);
+                });
+            }
+        });
+
+
 		$(this).parent().next().toggleClass("hide");
 		$(this).toggleClass("on");
 	});
+
 	// 具体评论中显示回复和点赞
 	$(document).on("mouseenter", ".commentItem", function(event){
 		$(this).find(".commentItem-action").css("visibility", "visible");
@@ -31,30 +115,114 @@ $(function(){
 		$(this).find(".commentItem-action").css("visibility", "hidden");
 	});
 
-	// 蓝色方框的点赞（点赞回答）
+	// 蓝色方框的点赞（点赞回答）*******************************************************
 	$(document).on("click", ".feed-vote", function(){
-		$(this).toggleClass("voted");
-		if($(this).hasClass("voted")){
-			var voteNum = parseInt($(this).html()) + 1;
-			$(this).attr("title", "取消赞");
-		}else{
-			var voteNum = parseInt($(this).html()) - 1;
-			$(this).attr("title", "赞一个");
+        // var $item = $(this).parents(".feed-item") == "undefined" ? $(this).parents(".feed-item") : $(this).parents(".List-item");
+        if($(this).parents(".feed-item").html()) {
+            var $item = $(this).parents(".feed-item");
+        }else if ($(this).parents(".List-item").html()){
+            var $item = $(this).parents(".List-item");
+        }else {
+        	var $item = $(this).parents(".answer-item");
 		}
-		$(this).html(voteNum);
-		if($(this).siblings(".answer-head").find(".voteCount")){
-			$(this).siblings(".answer-head").find(".voteCount").html(voteNum);
+        var answerId = $item.attr("id").substr(4);
+		var $this = $(this);
+
+		console.log("userId: " + userId + "     answerId: " + answerId);
+
+		// 点赞
+		if(!$this.hasClass("voted")){
+			//alert(userId);
+			//alert(answerId);
+            $.ajax({
+                type: "POST",
+                url: "/supports/support",
+                contentType: "application/json",
+                data: JSON.stringify({
+                    userId: userId,
+                    commentId: answerId
+                }),
+                dataType: "json",
+                success: function (data) {
+                	//alert(data.result);
+                    var voteNum;
+                    $this.toggleClass("voted");
+					voteNum = parseInt($this.html()) + 1;
+					$this.attr("title", "取消赞");
+                    $this.html(voteNum);
+                    if($this.siblings(".answer-head").find(".voteCount")){
+                        $this.siblings(".answer-head").find(".voteCount").html(voteNum);
+                    }
+                }
+            });
+		}else {  // 取消赞
+			//alert(userId);
+			//alert(answerId);
+            $.ajax({
+                type: "POST",
+                url: "/supports/support/remove",
+                data:{
+                    userId: userId,
+                    commentId: answerId
+                },
+                dataType: "json",
+                success: function (data) {
+                    var voteNum;
+                    $this.toggleClass("voted");
+					voteNum = parseInt($this.html()) - 1;
+					$this.attr("title", "赞一个");
+                    $this.html(voteNum);
+                    if($this.siblings(".answer-head").find(".voteCount")){
+                        $this.siblings(".answer-head").find(".voteCount").html(voteNum);
+                    }
+                }
+            });
 		}
 	});
 
-	// 点赞、回复
+	// 对评论的点赞、回复*************************************************************
 	$(document).on("click", ".commentItem-action", function(event){
 		event.preventDefault();
+		var $comment = $(this).parents(".commentItem");
+		var commentId = $comment.attr("data-commentId");
+		console.log("commentId: " + commentId);
+
 		$(this).toggleClass("on");
+		var $this = $(this);
+
 		if($(this).hasClass("action-like")){
-			var $numLikes = $(this).siblings(".commentItem-likes").find("span").eq(0);
-			var newNumLikes = $(this).hasClass("on") ? parseInt($numLikes.html()) + 1 : parseInt($numLikes.html()) - 1;
-			$numLikes.html(newNumLikes);
+			if($this.hasClass("on")) {
+                $.ajax({
+                    type: "POST",
+                    url: "/supports/support",
+                    contentType: "application/json",
+                    data: JSON.stringify({
+                        userId: userId,
+                        commentId: commentId
+                    }),
+                    dataType: "json",
+                    success: function (data) {
+                        var $numLikes = $this.siblings(".commentItem-likes").find("span").eq(0);
+                        var newNumLikes = parseInt($numLikes.html()) + 1;
+                        $numLikes.html(newNumLikes);
+                    }
+                });
+			}else {
+                $.ajax({
+                    type: "POST",
+                    url: "/supports/support/remove",
+                    data: {
+                        userId: userId,
+                        commentId: commentId
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        var $numLikes = $this.siblings(".commentItem-likes").find("span").eq(0);
+                        var newNumLikes = parseInt($numLikes.html()) - 1;
+                        $numLikes.html(newNumLikes);
+                    }
+                });
+			}
 		}else if($(this).hasClass("action-reply")){
 			var writeReply = '<div class="commentReply-expanded"><div class="commentReply-input"><textarea name="comment-reply" placeholder="写下你的评论" class="form-control"></textarea></div><div class="commentReply-actions"><button type="button" class="commentReply-submitButton btn btn-sm btn-primary">评论</button><button type="button" class="commentReply-cancelButton commentBox-textButton">取消</button></div></div>';
 			var $writeReply = $(writeReply);
@@ -80,7 +248,12 @@ $(function(){
 				return false;
 			}
 
-			var replyLink = "xuedinge.html";
+            // 回复评论******************************************************
+
+
+
+
+            var replyLink = "xuedinge.html";
 			var replyName = "鬼怪大叔";
 			var beRepliedLink = $author.attr("href");
 			var beRepliedName = $author.html();
@@ -114,41 +287,89 @@ $(function(){
 	// 提交评论
 	$(document).on("click", ".comment-box-actions .comment-box-submitButton", function(){
 		var $input = $(this).parent().prev().find("textarea").eq(0);
+        // var $item = $(this).parents(".feed-item") == "undefined" ? $(this).parents(".feed-item") : $(this).parents(".List-item");
+        if($(this).parents(".feed-item").html()) {
+            var $item = $(this).parents(".feed-item");
+        }else if($(this).parents(".List-item").html()) {
+            var $item = $(this).parents(".List-item");
+        }else {
+        	var $item = $(this).parents(".answer-item");
+		}
+        var answerId = $item.attr("id").substr(4),
+			answerThread = $item.attr("data-answerThread");
+		var $authorLink = $item.find(".author-link"),
+			authorId = $authorLink.attr("data-authorId"),
+			authorName = $authorLink.html();
+
+		var $questionLink = $item.find(".question-link"),
+			questionId = $questionLink.attr("id").substr(4);
+
+		var $this = $(this);
+
+		console.log(answerId);
+		console.log(questionId);
 		if(checkEmpty($input)){
 			alert("请输入你的评论！");
 			return false;
 		}
-		var replyLink = "xuedinge.html";
-		var replyName = "鬼怪大叔";
-		var commentContent = $input.val();
-		var voteCount = 0;
-		// 取得当前时间
-		var date = new Date();
-		var timeTitle = date.getFullYear() + "-" + setPreZero((date.getMonth() + 1)) + "-" + setPreZero(date.getDate()) + " "
-				+ setPreZero(date.getHours()) + ":" + setPreZero(date.getMinutes()) + ":" + setPreZero(date.getSeconds());
-		var time = setPreZero((date.getMonth() + 1)) + "-" + setPreZero(date.getDate()) + "&nbsp;" + setPreZero(date.getHours()) + ":" + setPreZero(date.getMinutes());
+		// 提交评论*******************************************************
+		$.ajax({
+			type: "POST",
+			url: "/comments/comment",
+			contentType: "application/json",
+			data: JSON.stringify({
+				parentId: answerId,
+				question: {
+					id: questionId
+				},
+				authorId: userId,
+				authorName: $("#user_name").val(),
+                replyId: authorId,
+                replyName: authorName,
+				thread: answerThread + answerId + "/",
+				summary: $input.val()
+			}),
+			dataType: "json",
+			success: function (data) {
+				var content = data.content;
+				console.log("提交评论后：" + content);
 
-		var newComment = '<div class="commentItem"><div class="commentItem-header"><a href="' 
-					+ replyLink + '" class="author-link">' 
-					+ replyName + '</a><button type="button" class="btn commentBox-textButton delete-button">删除</button></div><div class="commentItem-content">' 
-					+ commentContent + '</div><div class="commentItem-footer"><span class="commentItem-likes"><span>' 
-					+ voteCount + '</span> <span>赞</span></span><time title="' 
-					+ timeTitle + '">' 
-					+ time + '</time><a class="commentItem-action action-reply unselectable"><span class="glyphicon glyphicon-comment"></span><span>回复</span></a><a class="commentItem-action action-like unselectable"><span class="glyphicon glyphicon-thumbs-up"></span><span>赞</span></a></div></div>';
-		var $newComment = $(newComment);
-		// 更新总评论数
-		var $ansActions = $(this).parents(".answer-actions");
-		var oldNum = parseInt($ansActions.find(".comment-num").html());
-		$ansActions.find(".comment-num").html(oldNum + 1);
-		// 插入DOM
-		if(oldNum == 0){
-			$ansActions.find(".comment-box").append($newComment);
-			$ansActions.find(".load-more").removeClass("hide");
-		}else{
-			$newComment.insertBefore($ansActions.find(".comment-box .commentItem").eq(0));
-		}
-		// 清空输入框
-		$input.val("");	
+                // 输出格式：01-23 18:55
+                var date = new Date(content.time);
+                var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-',
+               	 	D = (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) + ' ',
+                	h = date.getHours() + ':',
+                	m = date.getMinutes();
+                var time = M+D+h+m;
+
+                var newComment = '<div class="commentItem" data-commentId="'
+					+ content.id + '"><div class="commentItem-header"><a href="/users/u/'
+                    + content.authorId + '" class="author-link">'
+                    + content.authorName + '</a> 回复 <a href="/users/u/'
+                    + content.replyId + '" class="author-link">'
+                    + content.replyName + '</a><button type="button" class="btn commentBox-textButton delete-button">删除</button></div><div class="commentItem-content">'
+                    + content.summary + '</div><div class="commentItem-footer"><span class="commentItem-likes"><span>'
+                    + 0 + '</span> <span>赞</span></span><time title="'
+                    + time + '">'
+                    + time + '</time><a class="commentItem-action action-reply unselectable"><span class="glyphicon glyphicon-comment"></span><span>回复</span></a><a class="commentItem-action action-like unselectable"><span class="glyphicon glyphicon-thumbs-up"></span><span>赞</span></a></div></div>';
+
+
+				var $newComment = $(newComment);
+                // 更新总评论数
+                var $ansActions = $this.parents(".answer-actions");
+                var oldNum = parseInt($ansActions.find(".comment-num").html());
+                $ansActions.find(".comment-num").html(oldNum + 1);
+                // 插入DOM
+                if(oldNum == 0){
+                    $ansActions.find(".comment-box").append($newComment);
+                    // $ansActions.find(".load-more").removeClass("hide");
+                }else{
+                    $newComment.insertBefore($ansActions.find(".comment-box .commentItem").eq(0));
+                }
+                // 清空输入框
+                $input.val("");
+            }
+		});
 	});
 	// 删除回复或评论
 	$(document).on("click", ".commentItem .delete-button", function(){
@@ -158,7 +379,7 @@ $(function(){
 		$ansActions.find(".comment-num").html(oldNum - 1);
 		// 若删除后，评论数为 0，隐藏“加载更多”
 		if(oldNum - 1 == 0){
-			$ansActions.find(".load-more").addClass("hide");
+			// $ansActions.find(".load-more").addClass("hide");
 		}
 		$(this).parents(".commentItem").remove();
 	});
@@ -170,6 +391,7 @@ $(function(){
 		$("#askModal textarea").val("");
 	});
 	// 提交提问
+	/*
 	$(document).on("click", ".btn-submit-ask", function(){
 		var $questionTitle = $(this).parents(".modal-content").find("textarea").eq(0);
 		var $questionDesc = $(this).parents(".modal-content").find("textarea").eq(1);
@@ -225,6 +447,7 @@ $(function(){
 		// 关闭模态框
 		$(this).parents(".modal-content").find(".close").click();
 	});
+	*/
 });
 
 

@@ -27,41 +27,74 @@
 					<label for="password">密码</label>
 					<input type="password" name="password" id="password" placeholder="输入你的密码" class="form-control" required="true" />
 				</div>
+				<span class="errorMessage"></span>
                 <button id ="login" type="submit" class="change btn btn-primary">登录</button>
                 <a href="./register" class="logReg-textButton">注册</a>
             <!--</form>	-->
 		</div>
 	</main>
+<div class="modal" id="popModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+				<h4 class="modal-title">提示</h4>
+			</div>
+			<div class="modal-body">
 
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary">确定</button>
+			</div>
+		</div>
+	</div>
+</div>
 
 <script type="text/javascript" src="js/lib/jquery.min.js"></script>
 <script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
 <script type="text/javascript">
-	var path="/zhiye";
+//	var path="/zhiye";
 	$(document).ready(function(){
+	    var $popModal = $("#popModal");
 		$("#login").click(function(){
 			var email=$("#email").val();
 			var password=$("#password").val();
-			$.ajax({
-				type:"POST",
-				url:path+"/users/loginResult",
-				contentType:"application/json",
-				data:JSON.stringify({
-					email:email,
-					password:password
-				}),
-				dataType:"json",
-				success:function(data){
-					console.log(JSON.stringify(data));
-					if(data.flag=="success"){
-						alert("登录成功");
-						window.location.href=path+"/index";
-					}else{
-						alert("登录失败")
+
+            var $errorMessage = $(".errorMessage");
+            var errorMessage = "";
+            var reg = /^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/;
+
+			if(!reg.test(email)) {
+	            errorMessage = "请填入正确的邮箱";
+	            $errorMessage.html(errorMessage);
+	     	}else if(password.replace(/\s+/g,'') == "") {
+          		errorMessage = "请输入密码";
+          		$errorMessage.html(errorMessage);
+	     	}else {
+				$.ajax({
+					type:"POST",
+					url:"/users/loginResult",
+					contentType:"application/json",
+					data:JSON.stringify({
+						email:email,
+						password:password
+					}),
+					dataType:"json",
+					success:function(data){
+						console.log(JSON.stringify(data));
+						if(data.flag=="success"){
+							window.location.href="/index";
+						}else{
+                            $popModal.find(".modal-body").html("登录失败");
+                            $popModal.modal("show");
+						}
 					}
-				}
-			})
+				});
+			}
 		});
+        $popModal.find(".modal-footer button").click(function () {
+            $popModal.find(".close").click();
+        });
 	});
 </script>
 </body>

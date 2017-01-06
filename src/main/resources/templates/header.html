@@ -1,0 +1,27 @@
+<header role="banner" class="AppHeader">
+    <div class="AppHeader-inner">
+        <a href="/index" aria-label="知也" class="AppName" title="进入首页">知也</a>
+        <nav role="navigation" class="AppHeader-nav">
+            <a href="/index" class="AppHeader-navItem">首页</a>
+            <a href="/discovery" class="AppHeader-navItem">发现</a>
+        </nav>
+        <div role="search" class="SearchBar">
+            <div class="SearchBar-toolWrapper">
+                <form action="searchResultQue.html" class="SearchBar-tool">
+                    <div class="SearchBar-input">
+                        <input type="text" name="" aria-expanded="false" class="form-control" placeholder="搜索你感兴趣的内容" />
+                    </div>
+                    <button class="btn btn-default SearchBar-searchIcon">搜索</button>
+                </form>
+            </div>
+            <button type="button" class="SearchBar-askButton Button Button--primary Button--blue" data-toggle="modal" data-target="#askModal">提问</button>
+        </div>
+        <div class="AppHeader-userInfo">
+            <div class="AppHeader-username">
+                <a th:href="@{'/users/u/'+${session.user.id}}" title="进入个人主页" th:text="${session.user.userName}">薛定谔的猫</a>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="user_id" th:value="${session.user.id}" />
+    <input type="hidden" id="user_name" th:value="${session.user.userName}" />
+</header>

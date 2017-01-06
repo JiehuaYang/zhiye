@@ -6,7 +6,9 @@ import com.scut.dto.Message;
 import com.scut.entity.*;
 import com.scut.util.*;
 import com.sun.xml.internal.ws.api.message.*;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.*;
+import org.springframework.transaction.annotation.*;
 
 import javax.annotation.*;
 import java.util.*;
@@ -18,7 +20,12 @@ import java.util.*;
 public class UserService {
     @Resource
     private UserDao userDao;
-
+    @Resource
+    private QuestionDao questionDao;
+    @Resource
+    private CommentDao commentDao;
+    @Resource
+    private SupportDao supportDao;
 
     public Message<String> insertUser(String email, String username, String password1, String password2) {
         Message<String> message=new Message<>();
@@ -43,12 +50,71 @@ public class UserService {
     public User doLogin(User user) {
         String md5Pass=MD5Util.getMD5(user.getPassword());
         user.setPassword(md5Pass);
-        List<User> userList=userDao.findByEmailAndPassword(user.getEmail(),user.getPassword());
+        User user1=userDao.findByEmailAndPassword(user.getEmail(),user.getPassword());
 
-        if(userList.size()>0){
-           return userList.get(0);
-        }else{
-           return null;
+        return user1;
+    }
+
+    public User findUserById(Integer id) {
+        User user = userDao.findOne(id);
+       if(user!=null){
+           user.setNumOfQuestion(questionDao.getQuestionCountByAuthorId(id));
+           user.setNumOfAnswer(commentDao.getCommentCountByUserId(id));
+       }
+        return user;
+    }
+
+    @Transactional
+    public boolean updateUserSex(Integer uid, Integer sex) {
+        try{
+            userDao.updateUserSex(uid,sex);
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
         }
+    }
+
+    @Transactional
+    public String updatePassword(Integer uid, String oldPass, String newPass1, String newPass2) {
+        if(!newPass1.equals(newPass2)){
+            return "密码不同";
+        }
+        if(userDao.updatePassword(uid,MD5Util.getMD5(oldPass),MD5Util.getMD5(newPass1))>0){
+            return "success";
+        }else{
+            return "原密码错误";
+        }
+
+    }
+
+    public Page<Question> getUserQuestion(Integer uid, Pageable pageable) {
+        return questionDao.getUserQuestion(uid,pageable);
+    }
+
+    public Map<String,Object> getUserAnswers(Integer uid, Pageable pageable) {
+        Page<Comment> commentPage = commentDao.getUserAnswers(uid, pageable);
+        Map<String, Object> map = new HashMap<>();
+        List<Comment> commentList = commentPage.getContent();
+        for(Comment comment:commentList){
+            if(supportDao.isSupportExisted(uid,comment.getId())>0){
+                comment.setSupport(true);
+            }else{
+                comment.setSupport(false);
+            }
+        }
+        map.put("isLast", commentPage.isLast());
+        map.put("content", commentList);
+        return map;
+    }
+
+    public List<User> searchUser(String key) {
+        List<User> userList = userDao.searchUserByKey(key);
+        for(User user:userList){
+            user.setNumOfQuestion(questionDao.getQuestionCountByAuthorId(user.getId()));
+            user.setNumOfAnswer(commentDao.getCommentCountByUserId(user.getId()));
+            user.setPassword(null);
+        }
+        return userList;
     }
 }

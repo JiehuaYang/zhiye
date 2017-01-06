@@ -1,4 +1,39 @@
 $(function(){
+    var currentPath = window.location.pathname;
+    var userId = currentPath.slice(12, -6);
+
+    var $tabs = $(".ProfileMain-tabs");
+    var finish = false;
+    var $loadMore = $(".load-moreAns");
+    var $more = $loadMore.find(".more");
+    var $loading = $loadMore.find(".loading");
+
+    // 获取用户个人信息，“回答”、“提问”、“个人信息”都需要
+    $.ajax({
+        type: "GET",
+        url: "/users/user/" + userId,
+        contentType: "application/json",
+        data: {
+
+        },
+        dataType: "json",
+        success: function (data) {
+            var user = data.user;
+            $(".info-author-name").html(user.userName);
+            var sex = user.sex ? "男" : "女";
+            $(".info-author-gender").find("span").html(sex);
+            $(".info-author-experience").find("span").html(user.integral);
+            $tabs.find("li").eq(0).find("span").html(user.numOfAnswer);
+            $tabs.find("li").eq(0).find("a").attr("href", "/users/user/" + userId + "/answers");
+            $tabs.find("li").eq(1).find("span").html(user.numOfQuestion);
+            $tabs.find("li").eq(1).find("a").attr("href", "/users/user/" + userId + "/questions");
+
+            $tabs.find("li").eq(2).removeClass("hide");
+            $tabs.find("li").eq(2).find("a").attr("href", "/users/user/" + userId + "/infos");
+        }
+    });
+
+
 	// 性别修改
 	var $gender = $(".info-item.gender");
 	var $change = $gender.find(".change");

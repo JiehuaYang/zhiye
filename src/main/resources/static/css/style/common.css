@@ -17,24 +17,23 @@ h2, h3, h4, h5 {
     outline: 0;
 }
 textarea {
-	resize: none;
+    resize: none;
 }
 button {
-	outline: none;
+    outline: none;
 }
 li {
-	list-style-type: none;
+    list-style-type: none;
 }
-
 
 .unselectable {
-	-moz-user-select:none;
-	-khtml-user-select:none;
-	-webkit-user-select:none;
+    -moz-user-select:none;
+    -khtml-user-select:none;
+    -webkit-user-select:none;
 }
 .common-box {
-	margin-top: 8px;
-	margin-bottom: 20px;
+    margin-top: 8px;
+    margin-bottom: 20px;
     background: #fff;
     border: 1px solid #e7eaf1;
     border-radius: 2px;
@@ -66,20 +65,20 @@ li {
     border: 1px solid #0f88eb;
 }
 .author-link {
-	font-weight: 700;
+    font-weight: 700;
 }
 .author-link:hover {
-	color: black;
+    color: black;
 }
 .question-link {
-	font-size: 17px;
-	color: #259;
+    font-size: 17px;
+    color: #259;
 }
 .question-link:hover {
-	color: #259;
+    color: #259;
 }
 .expand {
-	display: inline-block;
+    display: inline-block;
     padding: 0 3px;
     font-size: .8em;
     color: #259;
@@ -87,43 +86,43 @@ li {
 }
 .expand:hover {
     text-decoration: none;
-	border-radius: 2px;
+    border-radius: 2px;
     background-color: #eff6fa;
 }
 .pack-up {
-	float: right;
-	background-color: #81baeb;
-	opacity: 0.9;
-	color: white;
-	padding-top: 3px;
-	padding-bottom: 3px;
+    float: right;
+    background-color: #81baeb;
+    opacity: 0.9;
+    color: white;
+    padding-top: 3px;
+    padding-bottom: 3px;
 }
 .pack-up:hover {
-	opacity: 1;
-	color: white;
+    opacity: 1;
+    color: white;
 }
 .feed-vote {
-	display: inline-block;
-	margin-left: 20px;
-	padding: 4px 9px;
-	width: 60px;
-	text-align: center;
-	background-color: #eff6fa;
-	color: #698ebf;
-	border-radius: 3px;
-	font-size: 17px;
+    display: inline-block;
+    margin-left: 20px;
+    padding: 4px 9px;
+    width: 60px;
+    text-align: center;
+    background-color: #eff6fa;
+    color: #698ebf;
+    border-radius: 3px;
+    font-size: 17px;
 }
 .feed-vote:hover {
-	background-color: #698ebf;
-	color: white;
-	cursor: pointer;
+    background-color: #698ebf;
+    color: white;
+    cursor: pointer;
 }
 .feed-vote.voted {
-	background-color: #698ebf;
-	color: white;
+    background-color: #698ebf;
+    color: white;
 }
 .feed-summary {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 
@@ -140,11 +139,11 @@ li {
     background-clip: content-box;
 }
 .AppHeader-inner {
-	display: flex;
+    display: flex;
     position: relative;
     top: 0;
     /*固定宽高*/
-    width: 1000px;  
+    width: 1000px;
     height: 60px;
     padding: 0 16px;
     margin: 0 auto;
@@ -155,19 +154,19 @@ li {
     transition: top .3s;
 }
 .AppHeader-inner .AppName {
-	color: #0f88eb;
-	font-size: 30px;
+    color: #0f88eb;
+    font-size: 30px;
 }
 .AppHeader-inner .AppName:hover {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 /*导航栏*/
 .AppHeader-nav {
-	display: flex;
+    display: flex;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
     width: 170px;
     height: 30px;
     margin-right: 27px;
@@ -181,12 +180,12 @@ li {
     color: #8590a6;
 }
 .AppHeader-navItem:hover {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 /*搜索栏*/
 .SearchBar {
-	display: flex;
+    display: flex;
 }
 .SearchBar-toolWrapper {
     position: relative;
@@ -200,12 +199,12 @@ li {
     overflow: hidden;
 }
 .SearchBar-input {
-	width: 326px;
+    width: 326px;
 }
 .SearchBar-searchIcon {
-	position: absolute;
-	top: 0;
-	right: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 /*提问*/
 .SearchBar-askButton {
@@ -247,48 +246,52 @@ li {
     clear: both;
 }
 .main-feed-wrapper {
-	position: relative;
+    position: relative;
 }
 
 
 
 /*footer的编辑时间、评论等*/
 .answer-actions {
-	/*border-top: 1px dotted #ccc;*/
-	margin-top: 7px;
-	padding-top: 5px;	
+    /*border-top: 1px dotted #ccc;*/
+    margin-top: 7px;
+    padding-top: 5px;
 }
 .meta-item {
-	text-decoration: none;
-	margin-left: 35px;
-	color: #999;	
+    text-decoration: none;
+    margin-left: 35px;
+    color: #999;
 }
 a.meta-item:hover {
-	text-decoration: none;
-	color: #259;
+    text-decoration: none;
+    color: #259;
 }
 a.meta-item.toggle-comment.on {
-	color: #259;
+    color: #259;
 }
 
 /*评论*/
 .comment-holder {
-	margin-left: 80px;
+    margin-left: 80px;
+    padding-bottom: 8px;
 }
 .comment-holder, .comment-wrapper {
-	max-width: 600px;
+    max-width: 600px;
+    background-color: white;
 }
 .comment-wrapper {
-	border: 1px solid #ddd;
+    border: 1px solid #ddd;
     border-radius: 4px;
     box-shadow: 0 1px 1px rgba(0,0,0,.05);
     position: relative;
     margin-top: 1em;
-    margin-bottom: 3em;
+    /*margin-bottom: 3em;*/
+    /*margin-bottom: 5px;*/
     padding-bottom: 5px;
 }
 .comment-wrapper .icon-spike {
-    background-image: url("https://static.zhihu.com/static/revved/img/sprites-1.9.2.4c54885a.png");
+    /*background-image: url("https://static.zhihu.com/static/revved/img/sprites-1.9.2.4c54885a.png");*/
+    background-image: url("../../img/common/sprites.png");
     background-repeat: no-repeat;
     display: inline-block;
     vertical-align: middle;
@@ -300,49 +303,49 @@ a.meta-item.toggle-comment.on {
     background-position: -200px -165px;
 }
 .comment-wrapper .comment-box {
-	padding-left: 1em;
+    padding-left: 1em;
     padding-right: 1em;
 }
 .comment-wrapper .comment-box .commentItem {
-	position: relative;
+    position: relative;
     list-style: none;
     outline: none;
     padding: .9em 0;
     border-bottom: 1px solid #eee;
 }
 .commentItem-header {
-	color: #999;
+    color: #999;
 }
 .commentItem-header .author-link {
-	font-weight: 600;
-	font-size: 13px;
-	color: #222;
+    font-weight: 600;
+    font-size: 13px;
+    color: #222;
 }
 /*删除按钮*/
 .commentItem-header button {
-	padding: 4px;
-	float: right;
+    padding: 4px;
+    float: right;
 }
 .commentItem-header button:hover {
-	background-color: #999;
-	color: white;
+    background-color: #999;
+    color: white;
 }
 .commentItem-content {
-	min-height: 22px;
+    min-height: 22px;
     word-wrap: break-word;
     color: #222;
     margin-left: 10px;
 }
 .commentItem-footer {
-	font-size: .95em;
-	color: #999;
+    font-size: .95em;
+    color: #999;
 }
 .commentItem-footer .commentItem-likes {
-	float: right;
+    float: right;
     padding-right: 2px;
 }
 .commentItem-footer .commentItem-action {
-	padding: 0;
+    padding: 0;
     border: 0;
     outline: 0;
     background: none;
@@ -352,29 +355,29 @@ a.meta-item.toggle-comment.on {
     visibility: hidden;
 }
 .commentItem-footer .commentItem-action:hover {
-	color: #698ebf;
-	text-decoration: none;
+    color: #698ebf;
+    text-decoration: none;
 }
 .commentItem-footer .commentItem-action.on {
-	color: #698ebf;
-	font-weight: 700;
+    color: #698ebf;
+    font-weight: 700;
 }
 
 
 /*对于回答里的评论的操作*/
 .commentReply-expanded, .comment-box-expanded {
-	margin-top: 1em;
+    margin-top: 1em;
     padding-bottom: 0;
     text-align: right;
     line-height: 33px;
     /*display: none;*/
 }
 .commentReply-input, .comment-box-input {
-	margin-bottom: 5px;
+    margin-bottom: 5px;
 }
 /*评论内的文字按钮*/
 .commentBox-textButton, .logReg-textButton {
-	padding: 0;
+    padding: 0;
     border: 0;
     outline: 0;
     background: none;
@@ -382,40 +385,87 @@ a.meta-item.toggle-comment.on {
     color: #999;
 }
 .commentReply-submitButton, .comment-box-submitButton {
-	float: right;
+    float: right;
 }
 .commentReply-cancelButton {
-	margin-right: 1em;
+    margin-right: 1em;
 }
 
 /*评论区最下面的“提交评论”*/
 .comment-box-expanded {
-	padding: 2px 10px;
+    padding: 2px 10px;
 }
 
 
 /*加载更多*/
 .load-more {
-	margin-top: 4px;
-	text-align: center;
+    margin-top: 4px;
+    text-align: center;
 }
 .load-more span {
-	color: #555;
-	font-size: 13px;
-	cursor: pointer;
+    color: #555;
+    font-size: 13px;
+    cursor: pointer;
 }
 .load-more span:hover {
-	font-weight: 600;
+    font-weight: 600;
 }
 
-/*模态框头部*/
+/*模态框*/
 .modal .modal-header {
-	background-color: #259;
-	color: white;
+    background-color: #259;
+    color: white;
 }
 .modal .modal-header .close span {
-	color: white;
+    color: white;
+}
+.modal .modal-body {
+    min-height: 100px;
+}
+#popModal .modal-dialog {
+    width: 350px;
+}
+#popModal .modal-body {
+    font-size: 20px;
+    text-align: center;
+    line-height: 100px;
 }
 
+/*暂无系列*/
+.none {
+    text-align: center;
+    padding: 40px 0;
+    font-size: 40px;
+    color: #ccc;
+}
+.delete {
+    display: inline-block;
+    float: right;
+    margin-right: 20px;
+    padding: 3px 8px;
+    border-radius: 3px;
+}
+.delete:hover {
+    color: white;
+    background-color: #698ebf;
+}
+
+.question-filter {
+    padding: 5px 15px;
+    margin-bottom: 5px;
+    text-align: right;
+}
+.question-filter .hot-filter {
+    padding-right: 5px;
+}
+.question-filter .time-filter {
+    border-left: 1px solid #666;
+    padding-left: 10px;
+}
+.selected-filter {
+    color: #259;
+    font-size: 16px;
+    font-weight: 600;
+}
 
 
